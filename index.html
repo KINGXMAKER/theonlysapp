@@ -1,0 +1,1997 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE ONLYS — BBO Ambassador Task Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- ===================== CSS STYLES ===================== -->
+  <style>
+    /* === RESET & BASE === */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --pink: #ff1493;
+      --dark-pink: #c2185b;
+      --soft-pink: #ff69b4;
+      --black: #0a0a0a;
+      --charcoal: #1a1a1a;
+      --surface: #141414;
+      --card: #1e1e1e;
+      --white: #ffffff;
+      --gray-text: #999;
+      --gray-muted: #666;
+      --gray-subtle: #333;
+      --border: rgba(255, 20, 147, 0.2);
+      --border-hover: rgba(255, 20, 147, 0.5);
+      --bg-subtle: rgba(255, 255, 255, 0.04);
+      --bg-hover: rgba(255, 20, 147, 0.1);
+      --font-heading: 'Bebas Neue', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+      --radius: 10px;
+      --radius-sm: 6px;
+      --radius-lg: 14px;
+      --transition: 0.2s ease;
+      --high: #ff4757;
+      --medium: #ffa502;
+      --low: #2ed573;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* === HEADER === */
+    .header {
+      padding: 28px 24px 20px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .header h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2.8rem, 7vw, 4.5rem);
+      letter-spacing: 6px;
+      color: var(--pink);
+      text-shadow:
+        0 0 10px rgba(255, 20, 147, 0.8),
+        0 0 30px rgba(255, 20, 147, 0.5),
+        0 0 60px rgba(255, 20, 147, 0.3),
+        0 0 100px rgba(255, 20, 147, 0.15);
+      -webkit-text-fill-color: var(--pink);
+      animation: neonPulse 3s ease-in-out infinite alternate;
+    }
+
+    .header-crown {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 2px;
+      filter: drop-shadow(0 0 12px rgba(255, 20, 147, 0.6));
+    }
+
+    @keyframes neonPulse {
+      from {
+        text-shadow:
+          0 0 10px rgba(255, 20, 147, 0.8),
+          0 0 30px rgba(255, 20, 147, 0.5),
+          0 0 60px rgba(255, 20, 147, 0.3);
+      }
+
+      to {
+        text-shadow:
+          0 0 15px rgba(255, 20, 147, 1),
+          0 0 40px rgba(255, 20, 147, 0.7),
+          0 0 80px rgba(255, 20, 147, 0.4),
+          0 0 120px rgba(255, 20, 147, 0.2);
+      }
+    }
+
+    .header p {
+      color: var(--gray-text);
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+
+    .header-actions {
+      position: absolute;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      width: 36px;
+      height: 36px;
+      background: var(--surface);
+      border: 1px solid var(--gray-subtle);
+      border-radius: var(--radius-sm);
+      color: var(--gray-text);
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition);
+    }
+
+    .icon-btn:hover {
+      border-color: var(--pink);
+      color: var(--pink);
+    }
+
+    .icon-btn.active {
+      border-color: var(--pink);
+      color: var(--pink);
+      background: var(--bg-hover);
+    }
+
+    /* === STATS ROW === */
+    .stats-row {
+      display: flex;
+      gap: 12px;
+      padding: 16px 24px;
+      overflow-x: auto;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 20px;
+      text-align: center;
+      min-width: 120px;
+      flex-shrink: 0;
+    }
+
+    .stat-card .stat-value {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      color: var(--pink);
+      line-height: 1;
+    }
+
+    .stat-card .stat-label {
+      color: var(--gray-text);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    .stat-card.overdue .stat-value {
+      color: var(--high);
+    }
+
+    /* === AI COMMAND BAR === */
+    .ai-bar {
+      display: none;
+      padding: 12px 24px;
+      border-bottom: 1px solid var(--border);
+      gap: 10px;
+      align-items: center;
+    }
+
+    .ai-bar.visible {
+      display: flex;
+    }
+
+    .ai-bar-input {
+      flex: 1;
+      padding: 10px 14px;
+      background: var(--surface);
+      border: 1px solid var(--gray-subtle);
+      border-radius: var(--radius-sm);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color var(--transition);
+    }
+
+    .ai-bar-input:focus {
+      border-color: var(--pink);
+    }
+
+    .ai-bar-input::placeholder {
+      color: var(--gray-muted);
+    }
+
+    .ai-bar-label {
+      color: var(--pink);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .ai-bar-btn {
+      padding: 10px 16px;
+      background: linear-gradient(135deg, var(--pink), var(--dark-pink));
+      color: var(--white);
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all var(--transition);
+      white-space: nowrap;
+    }
+
+    .ai-bar-btn:hover {
+      box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
+    }
+
+    .ai-bar-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .ai-bar-btn.secondary {
+      background: var(--surface);
+      border: 1px solid var(--gray-subtle);
+    }
+
+    .ai-bar-btn.secondary:hover {
+      border-color: var(--pink);
+    }
+
+    /* === TOOLBAR === */
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      padding: 12px 24px;
+      flex-wrap: wrap;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .toolbar .search-box {
+      flex: 1;
+      min-width: 180px;
+      padding: 10px 14px;
+      background: var(--surface);
+      border: 1px solid var(--gray-subtle);
+      border-radius: var(--radius-sm);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color var(--transition);
+    }
+
+    .toolbar .search-box:focus {
+      border-color: var(--pink);
+    }
+
+    .toolbar .search-box::placeholder {
+      color: var(--gray-muted);
+    }
+
+    .toolbar select {
+      padding: 10px 12px;
+      background: var(--surface);
+      border: 1px solid var(--gray-subtle);
+      border-radius: var(--radius-sm);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      outline: none;
+      cursor: pointer;
+      transition: border-color var(--transition);
+      -webkit-appearance: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23999'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      padding-right: 28px;
+    }
+
+    .toolbar select:focus {
+      border-color: var(--pink);
+    }
+
+    .toolbar select option {
+      background: var(--charcoal);
+      color: var(--white);
+    }
+
+    .btn-add {
+      padding: 10px 20px;
+      background: linear-gradient(135deg, var(--pink), var(--dark-pink));
+      color: var(--white);
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn-add:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
+    }
+
+    /* === BOARD === */
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      padding: 20px 24px 40px;
+      min-height: calc(100vh - 360px);
+      transition: margin-right var(--transition);
+    }
+
+    body.chat-open .board {
+      margin-right: 380px;
+    }
+
+    @media (max-width: 900px) {
+      .board {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        min-height: auto;
+      }
+
+      body.chat-open .board {
+        margin-right: 0;
+      }
+    }
+
+    /* === COLUMNS === */
+    .column {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      display: flex;
+      flex-direction: column;
+      min-height: 300px;
+      transition: border-color var(--transition), background var(--transition);
+    }
+
+    .column.drag-over {
+      border-color: var(--pink);
+      background: rgba(255, 20, 147, 0.03);
+    }
+
+    .column-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 18px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .column-header h2 {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      letter-spacing: 1.5px;
+      color: var(--white);
+    }
+
+    .column-header .count {
+      background: var(--bg-hover);
+      color: var(--pink);
+      font-weight: 700;
+      font-size: 0.75rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      min-width: 28px;
+      text-align: center;
+    }
+
+    .column-body {
+      flex: 1;
+      padding: 12px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .empty-state {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      color: var(--gray-muted);
+      font-size: 0.85rem;
+      font-style: italic;
+      padding: 30px 10px;
+      text-align: center;
+    }
+
+    /* === TASK CARDS === */
+    .task-card {
+      background: var(--card);
+      border: 1px solid var(--gray-subtle);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      cursor: grab;
+      transition: all var(--transition);
+      user-select: none;
+    }
+
+    .task-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .task-card.dragging {
+      opacity: 0.4;
+      transform: rotate(2deg);
+    }
+
+    .task-card:active {
+      cursor: grabbing;
+    }
+
+    .task-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .task-title {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--white);
+      flex: 1;
+      word-break: break-word;
+      cursor: pointer;
+    }
+
+    .task-title:hover {
+      color: var(--soft-pink);
+    }
+
+    .priority-badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      flex-shrink: 0;
+      line-height: 1.6;
+    }
+
+    .priority-badge.high {
+      background: rgba(255, 71, 87, 0.15);
+      color: var(--high);
+    }
+
+    .priority-badge.medium {
+      background: rgba(255, 165, 2, 0.15);
+      color: var(--medium);
+    }
+
+    .priority-badge.low {
+      background: rgba(46, 213, 115, 0.15);
+      color: var(--low);
+    }
+
+    .task-meta {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 0.75rem;
+    }
+
+    .task-date {
+      color: var(--gray-text);
+    }
+
+    .task-date.overdue {
+      color: var(--high);
+      font-weight: 600;
+    }
+
+    .task-label {
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .task-ambassador {
+      color: var(--soft-pink);
+      font-weight: 500;
+      margin-left: auto;
+    }
+
+    .task-link-icon {
+      color: var(--gray-muted);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: color var(--transition);
+      text-decoration: none;
+    }
+
+    .task-link-icon:hover {
+      color: var(--pink);
+    }
+
+    /* Label colors */
+    .label-content {
+      background: rgba(56, 103, 214, 0.2);
+      color: #5b9aff;
+    }
+
+    .label-event {
+      background: rgba(255, 20, 147, 0.15);
+      color: var(--soft-pink);
+    }
+
+    .label-outreach {
+      background: rgba(255, 165, 2, 0.15);
+      color: #ffb142;
+    }
+
+    .label-promo {
+      background: rgba(165, 94, 234, 0.15);
+      color: #c57bff;
+    }
+
+    .label-merch {
+      background: rgba(46, 213, 115, 0.15);
+      color: #5ef29c;
+    }
+
+    .label-admin {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--gray-text);
+    }
+
+    /* === MODAL OVERLAY === */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 16px;
+      overflow-y: auto;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--charcoal);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 520px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+      animation: modalIn 0.2s ease;
+    }
+
+    @keyframes modalIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.97);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-header h2 {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      letter-spacing: 1px;
+      color: var(--white);
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: var(--gray-muted);
+      font-size: 1.4rem;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+      transition: all var(--transition);
+      line-height: 1;
+    }
+
+    .modal-close:hover {
+      color: var(--white);
+      background: var(--bg-subtle);
+    }
+
+    .modal-body {
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .field-group label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--gray-text);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .field-group input,
+    .field-group select,
+    .field-group textarea {
+      padding: 10px 12px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--gray-subtle);
+      border-radius: var(--radius-sm);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color var(--transition);
+    }
+
+    .field-group input:focus,
+    .field-group select:focus,
+    .field-group textarea:focus {
+      border-color: var(--pink);
+    }
+
+    .field-group textarea {
+      resize: vertical;
+      min-height: 70px;
+    }
+
+    .field-group select option {
+      background: var(--charcoal);
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 480px) {
+      .field-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .modal-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      padding: 16px 24px 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .modal-footer .btn-delete {
+      margin-right: auto;
+      padding: 8px 16px;
+      background: rgba(255, 71, 87, 0.1);
+      color: var(--high);
+      border: 1px solid rgba(255, 71, 87, 0.3);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .modal-footer .btn-delete:hover {
+      background: rgba(255, 71, 87, 0.2);
+    }
+
+    .modal-footer .btn-cancel {
+      padding: 8px 16px;
+      background: transparent;
+      color: var(--gray-text);
+      border: 1px solid var(--gray-subtle);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .modal-footer .btn-cancel:hover {
+      color: var(--white);
+      border-color: var(--gray-muted);
+    }
+
+    .modal-footer .btn-save {
+      padding: 8px 20px;
+      background: linear-gradient(135deg, var(--pink), var(--dark-pink));
+      color: var(--white);
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .modal-footer .btn-save:hover {
+      box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
+    }
+
+    /* === AI CHAT PANEL === */
+    .chat-panel {
+      position: fixed;
+      right: -400px;
+      top: 0;
+      width: 380px;
+      height: 100vh;
+      background: var(--charcoal);
+      border-left: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      z-index: 900;
+      transition: right 0.3s ease;
+      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .chat-panel.open {
+      right: 0;
+    }
+
+    @media (max-width: 900px) {
+      .chat-panel {
+        width: 100%;
+        right: -100%;
+      }
+    }
+
+    .chat-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .chat-header h3 {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      color: var(--pink);
+    }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .chat-msg {
+      max-width: 90%;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .chat-msg.user {
+      align-self: flex-end;
+      background: linear-gradient(135deg, var(--pink), var(--dark-pink));
+      color: var(--white);
+      border-bottom-right-radius: 2px;
+    }
+
+    .chat-msg.ai {
+      align-self: flex-start;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--white);
+      border-bottom-left-radius: 2px;
+    }
+
+    .chat-msg.ai.thinking {
+      color: var(--gray-muted);
+      font-style: italic;
+    }
+
+    .chat-input-area {
+      padding: 12px 16px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .chat-input {
+      flex: 1;
+      padding: 10px 12px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--gray-subtle);
+      border-radius: var(--radius-sm);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color var(--transition);
+    }
+
+    .chat-input:focus {
+      border-color: var(--pink);
+    }
+
+    .chat-input::placeholder {
+      color: var(--gray-muted);
+    }
+
+    .chat-send {
+      padding: 10px 16px;
+      background: linear-gradient(135deg, var(--pink), var(--dark-pink));
+      color: var(--white);
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .chat-send:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* === SETTINGS MODAL === */
+    .settings-body {
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .settings-body .field-group input {
+      font-size: 0.82rem;
+    }
+
+    .settings-note {
+      color: var(--gray-muted);
+      font-size: 0.75rem;
+      line-height: 1.4;
+    }
+
+    .key-status {
+      font-size: 0.75rem;
+      margin-top: 4px;
+    }
+
+    .key-status.valid {
+      color: var(--low);
+    }
+
+    .key-status.missing {
+      color: var(--high);
+    }
+
+    /* === SCROLLBAR === */
+    .column-body::-webkit-scrollbar,
+    .chat-messages::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .column-body::-webkit-scrollbar-track,
+    .chat-messages::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .column-body::-webkit-scrollbar-thumb,
+    .chat-messages::-webkit-scrollbar-thumb {
+      background: var(--gray-subtle);
+      border-radius: 4px;
+    }
+
+    /* === MOBILE === */
+    @media (max-width: 600px) {
+      .header {
+        padding: 20px 16px 16px;
+      }
+
+      .header-actions {
+        position: static;
+        transform: none;
+        justify-content: center;
+        margin-top: 10px;
+      }
+
+      .stats-row {
+        padding: 12px 16px;
+      }
+
+      .toolbar {
+        padding: 10px 16px;
+      }
+
+      .ai-bar {
+        padding: 10px 16px;
+        flex-wrap: wrap;
+      }
+
+      .board {
+        padding: 16px;
+      }
+
+      .stat-card {
+        padding: 10px 14px;
+        min-width: 100px;
+      }
+
+      .stat-card .stat-value {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===================== HTML STRUCTURE ===================== -->
+
+  <!-- HEADER -->
+  <div class="header">
+    <span class="header-crown">👑</span>
+    <h1>THE ONLYS</h1>
+    <p>BBO Ambassador Task Hub — Track content, outreach, event, and promo assignments</p>
+    <div class="header-actions">
+      <button class="icon-btn" id="btn-ai-bar" title="AI Command Bar">&#9889;</button>
+      <button class="icon-btn" id="btn-generate" title="Generate Tasks from Event">&#9881;</button>
+      <button class="icon-btn" id="btn-chat" title="AI Assistant">&#128172;</button>
+      <button class="icon-btn" id="btn-settings" title="AI Settings">&#9881;</button>
+    </div>
+  </div>
+
+  <!-- STATS ROW -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-value" id="stat-total">0</div>
+      <div class="stat-label">Total Tasks</div>
+    </div>
+    <div class="stat-card overdue">
+      <div class="stat-value" id="stat-overdue">0</div>
+      <div class="stat-label">Overdue</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="stat-done">0</div>
+      <div class="stat-label">Completed</div>
+    </div>
+  </div>
+
+  <!-- AI COMMAND BAR -->
+  <div class="ai-bar" id="ai-bar">
+    <span class="ai-bar-label">&#9889; AI</span>
+    <input type="text" class="ai-bar-input" id="ai-command"
+      placeholder='Try: "Tell Ambassador 1 to post reels by Friday" or "Add high priority event task for content day March 20"'>
+    <button class="ai-bar-btn" id="ai-command-btn" onclick="window._aiParseCommand()">Create</button>
+  </div>
+
+  <!-- TOOLBAR -->
+  <div class="toolbar">
+    <input type="text" class="search-box" id="search" placeholder="Search tasks...">
+    <select id="filter-ambassador">
+      <option value="">All Ambassadors</option>
+    </select>
+    <select id="filter-priority">
+      <option value="">All Priorities</option>
+      <option value="high">High</option>
+      <option value="medium">Medium</option>
+      <option value="low">Low</option>
+    </select>
+    <select id="filter-label">
+      <option value="">All Categories</option>
+    </select>
+    <select id="sort-by">
+      <option value="">Sort</option>
+      <option value="due-asc">Due Date (Earliest)</option>
+      <option value="due-desc">Due Date (Latest)</option>
+      <option value="priority">Priority (High First)</option>
+    </select>
+    <button class="btn-add" id="btn-add-task">+ Add Task</button>
+  </div>
+
+  <!-- KANBAN BOARD -->
+  <div class="board">
+    <div class="column" data-status="todo" id="col-todo">
+      <div class="column-header">
+        <h2>TO DO</h2>
+        <span class="count" id="count-todo">0</span>
+      </div>
+      <div class="column-body" id="body-todo"></div>
+    </div>
+    <div class="column" data-status="in-progress" id="col-in-progress">
+      <div class="column-header">
+        <h2>IN PROGRESS</h2>
+        <span class="count" id="count-in-progress">0</span>
+      </div>
+      <div class="column-body" id="body-in-progress"></div>
+    </div>
+    <div class="column" data-status="done" id="col-done">
+      <div class="column-header">
+        <h2>DONE</h2>
+        <span class="count" id="count-done">0</span>
+      </div>
+      <div class="column-body" id="body-done"></div>
+    </div>
+  </div>
+
+  <!-- TASK MODAL -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modal-title">ADD TASK</h2>
+        <button class="modal-close" id="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="field-group">
+          <label for="task-title">Title</label>
+          <input type="text" id="task-title" placeholder="What needs to be done?">
+        </div>
+        <div class="field-group">
+          <label for="task-desc">Description / Notes</label>
+          <textarea id="task-desc" placeholder="Details, instructions, context..."></textarea>
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label for="task-priority">Priority</label>
+            <select id="task-priority">
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+              <option value="low">Low</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label for="task-status">Status</label>
+            <select id="task-status">
+              <option value="todo">To Do</option>
+              <option value="in-progress">In Progress</option>
+              <option value="done">Done</option>
+            </select>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label for="task-due">Due Date</label>
+            <input type="date" id="task-due">
+          </div>
+          <div class="field-group">
+            <label for="task-label">Category</label>
+            <select id="task-label">
+              <option value="content">Content</option>
+              <option value="event">Event</option>
+              <option value="outreach">Outreach</option>
+              <option value="promo">Promo</option>
+              <option value="merch">Merch</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+        </div>
+        <div class="field-group">
+          <label for="task-ambassador">Assigned Ambassador</label>
+          <select id="task-ambassador">
+            <option value="">Unassigned</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label for="task-link">Link (Google Drive, Canva, IG post, etc.)</label>
+          <input type="url" id="task-link" placeholder="https://...">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-delete" id="btn-delete" style="display:none">Delete</button>
+        <button class="btn-cancel" id="btn-cancel">Cancel</button>
+        <button class="btn-save" id="btn-save">Save Task</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SETTINGS MODAL -->
+  <div class="modal-overlay" id="settings-overlay">
+    <div class="modal" style="max-width:460px">
+      <div class="modal-header">
+        <h2>AI SETTINGS</h2>
+        <button class="modal-close"
+          onclick="document.getElementById('settings-overlay').classList.remove('active')">&times;</button>
+      </div>
+      <div class="settings-body">
+        <div class="field-group">
+          <label for="or-key">OpenRouter API Key</label>
+          <input type="password" id="or-key" placeholder="sk-or-v1-...">
+          <div class="key-status" id="key-status"></div>
+        </div>
+        <div class="field-group">
+          <label for="or-model">Model</label>
+          <select id="or-model">
+            <option value="deepseek/deepseek-chat-v3-0324:free">DeepSeek V3 0324 (Free)</option>
+            <option value="deepseek/deepseek-r1-0528:free">DeepSeek R1 0528 (Free)</option>
+            <option value="deepseek/deepseek-chat-v3.1:free">DeepSeek V3.1 (Free)</option>
+          </select>
+        </div>
+        <p class="settings-note">Your API key is stored in your browser's localStorage only. Never sent anywhere except
+          OpenRouter's API.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-save" onclick="window._saveSettings()">Save Settings</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- GENERATE TASKS MODAL -->
+  <div class="modal-overlay" id="generate-overlay">
+    <div class="modal" style="max-width:480px">
+      <div class="modal-header">
+        <h2>GENERATE TASKS</h2>
+        <button class="modal-close"
+          onclick="document.getElementById('generate-overlay').classList.remove('active')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="field-group">
+          <label for="gen-event-type">Event Type</label>
+          <select id="gen-event-type">
+            <option value="Restaurant Takeover">Restaurant Takeover</option>
+            <option value="Content Day">Content Day</option>
+            <option value="Strip Club Takeover">Strip Club Takeover</option>
+            <option value="BBO After Hours">BBO After Hours</option>
+            <option value="Merch Drop">Merch Drop</option>
+            <option value="Podcast Episode">Podcast Episode</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label for="gen-event-date">Event Date</label>
+          <input type="date" id="gen-event-date">
+        </div>
+        <div class="field-group">
+          <label for="gen-venue">Venue / Details (optional)</label>
+          <input type="text" id="gen-venue" placeholder="e.g. Catch NYC, 8pm">
+        </div>
+        <div class="field-group">
+          <label for="gen-notes">Additional Notes (optional)</label>
+          <textarea id="gen-notes" placeholder="Any special requirements, themes, or instructions..."
+            style="min-height:50px"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-cancel"
+          onclick="document.getElementById('generate-overlay').classList.remove('active')">Cancel</button>
+        <button class="btn-save" id="btn-gen-go" onclick="window._generateTasks()">Generate with AI</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI CHAT PANEL -->
+  <div class="chat-panel" id="chat-panel">
+    <div class="chat-header">
+      <h3>&#9889; AI ASSISTANT</h3>
+      <button class="modal-close" onclick="window._toggleChat()">&times;</button>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+      <div class="chat-msg ai">What's good? I'm your task hub assistant. Ask me anything about your tasks, events, or
+        ambassador workflow. I can see your current board.</div>
+    </div>
+    <div class="chat-input-area">
+      <input type="text" class="chat-input" id="chat-input" placeholder="Ask anything...">
+      <button class="chat-send" id="chat-send-btn" onclick="window._sendChat()">Send</button>
+    </div>
+  </div>
+
+  <!-- ===================== JAVASCRIPT LOGIC ===================== -->
+  <script>
+    (function () {
+      "use strict";
+
+      /* ================================================
+         DATA & CONFIGURATION
+         ================================================ */
+      var LABELS = ["content", "event", "outreach", "promo", "merch", "admin"];
+      var DEFAULT_AMBASSADORS = ["Ktari", "Anjphobia", "Chanel aka Cardi C", "Msss Lee", "Alenexiss_", "Trillionaire T"];
+      var STORAGE_KEY = "bbo_tasks";
+      var AMBASSADOR_KEY = "bbo_ambassadors";
+      var OR_KEY_STORAGE = "bbo_openrouter_key";
+      var OR_MODEL_STORAGE = "bbo_openrouter_model";
+      var PRIORITY_ORDER = { high: 0, medium: 1, low: 2 };
+
+      var tasks = [];
+      var ambassadors = [];
+      var editingId = null;
+      var draggedId = null;
+      var chatHistory = [];
+
+      /* ================================================
+         DOM REFERENCES
+         ================================================ */
+      function $(sel) { return document.querySelector(sel); }
+      function $$(sel) { return document.querySelectorAll(sel); }
+
+      var modalOverlay = $("#modal-overlay");
+      var modalTitle = $("#modal-title");
+      var btnAdd = $("#btn-add-task");
+      var btnSave = $("#btn-save");
+      var btnCancel = $("#btn-cancel");
+      var btnDelete = $("#btn-delete");
+      var btnClose = $("#modal-close");
+      var searchInput = $("#search");
+      var filterAmbassador = $("#filter-ambassador");
+      var filterPriority = $("#filter-priority");
+      var filterLabel = $("#filter-label");
+      var sortBy = $("#sort-by");
+
+      var fieldTitle = $("#task-title");
+      var fieldDesc = $("#task-desc");
+      var fieldPriority = $("#task-priority");
+      var fieldStatus = $("#task-status");
+      var fieldDue = $("#task-due");
+      var fieldLabel = $("#task-label");
+      var fieldAmbassador = $("#task-ambassador");
+      var fieldLink = $("#task-link");
+
+      /* ================================================
+         LOCAL STORAGE PERSISTENCE
+         ================================================ */
+      function save() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+        localStorage.setItem(AMBASSADOR_KEY, JSON.stringify(ambassadors));
+      }
+
+      function load() {
+        try {
+          var stored = localStorage.getItem(STORAGE_KEY);
+          tasks = stored ? JSON.parse(stored) : [];
+        } catch (e) { tasks = []; }
+        try {
+          var storedAmb = localStorage.getItem(AMBASSADOR_KEY);
+          ambassadors = storedAmb ? JSON.parse(storedAmb) : DEFAULT_AMBASSADORS.slice();
+        } catch (e) { ambassadors = DEFAULT_AMBASSADORS.slice(); }
+      }
+
+      function getApiKey() { return localStorage.getItem(OR_KEY_STORAGE) || ""; }
+      function getModel() { return localStorage.getItem(OR_MODEL_STORAGE) || "deepseek/deepseek-chat-v3-0324:free"; }
+
+      /* ================================================
+         OPENROUTER API CALL
+         ================================================ */
+      function callAI(systemPrompt, userMessage, callback) {
+        var key = getApiKey();
+        if (!key) {
+          callback("Set your OpenRouter API key first (click the gear icon in the header).", true);
+          return;
+        }
+        var messages = [];
+        if (systemPrompt) messages.push({ role: "system", content: systemPrompt });
+        if (typeof userMessage === "string") {
+          messages.push({ role: "user", content: userMessage });
+        } else {
+          // userMessage is an array of messages
+          messages = messages.concat(userMessage);
+        }
+
+        fetch("https://openrouter.ai/api/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + key,
+            "HTTP-Referer": "https://bbouniverse.com",
+            "X-Title": "BBO Ambassador Task Hub"
+          },
+          body: JSON.stringify({
+            model: getModel(),
+            messages: messages,
+            max_tokens: 2048,
+            temperature: 0.7
+          })
+        })
+          .then(function (res) { return res.json(); })
+          .then(function (data) {
+            if (data.error) {
+              callback("API Error: " + (data.error.message || JSON.stringify(data.error)), true);
+            } else {
+              var reply = data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content;
+              callback(reply || "No response from AI.", false);
+            }
+          })
+          .catch(function (err) {
+            callback("Connection failed: " + err.message, true);
+          });
+      }
+
+      /* ================================================
+         UTILITY FUNCTIONS
+         ================================================ */
+      function genId() {
+        return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+      }
+
+      function formatDate(dateStr) {
+        if (!dateStr) return "";
+        var d = new Date(dateStr + "T00:00:00");
+        return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+      }
+
+      function todayStr() {
+        var d = new Date();
+        return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+      }
+
+      function isOverdue(task) {
+        if (!task.due || task.status === "done") return false;
+        var today = new Date();
+        today.setHours(0, 0, 0, 0);
+        var due = new Date(task.due + "T00:00:00");
+        return due < today;
+      }
+
+      function escapeHtml(str) {
+        var div = document.createElement("div");
+        div.textContent = str || "";
+        return div.innerHTML;
+      }
+
+      function getBoardSummary() {
+        var todo = tasks.filter(function (t) { return t.status === "todo"; }).length;
+        var prog = tasks.filter(function (t) { return t.status === "in-progress"; }).length;
+        var done = tasks.filter(function (t) { return t.status === "done"; }).length;
+        var overdue = tasks.filter(isOverdue).length;
+        var summary = "Current board: " + tasks.length + " tasks (" + todo + " to do, " + prog + " in progress, " + done + " done, " + overdue + " overdue).\n";
+        if (tasks.length > 0) {
+          summary += "Tasks:\n";
+          tasks.forEach(function (t) {
+            summary += "- \"" + t.title + "\" [" + t.priority + ", " + t.label + ", " + t.status + "]";
+            if (t.ambassador) summary += " assigned to " + t.ambassador;
+            if (t.due) summary += " due " + t.due;
+            if (isOverdue(t)) summary += " (OVERDUE)";
+            summary += "\n";
+          });
+        }
+        summary += "Ambassadors: " + ambassadors.join(", ") + "\n";
+        summary += "Today: " + todayStr();
+        return summary;
+      }
+
+      /* ================================================
+         POPULATE DROPDOWNS
+         ================================================ */
+      function populateAmbassadorDropdowns() {
+        var currentFilterVal = filterAmbassador.value;
+        filterAmbassador.innerHTML = '<option value="">All Ambassadors</option>';
+        ambassadors.forEach(function (a) {
+          filterAmbassador.innerHTML += '<option value="' + escapeHtml(a) + '">' + escapeHtml(a) + '</option>';
+        });
+        filterAmbassador.value = currentFilterVal;
+
+        var currentFieldVal = fieldAmbassador.value;
+        fieldAmbassador.innerHTML = '<option value="">Unassigned</option>';
+        ambassadors.forEach(function (a) {
+          fieldAmbassador.innerHTML += '<option value="' + escapeHtml(a) + '">' + escapeHtml(a) + '</option>';
+        });
+        fieldAmbassador.value = currentFieldVal;
+      }
+
+      function populateLabelDropdown() {
+        filterLabel.innerHTML = '<option value="">All Categories</option>';
+        LABELS.forEach(function (l) {
+          var display = l.charAt(0).toUpperCase() + l.slice(1);
+          filterLabel.innerHTML += '<option value="' + l + '">' + display + '</option>';
+        });
+      }
+
+      /* ================================================
+         STATS
+         ================================================ */
+      function updateStats() {
+        var total = tasks.length;
+        var overdue = tasks.filter(isOverdue).length;
+        var done = tasks.filter(function (t) { return t.status === "done"; }).length;
+        $("#stat-total").textContent = total;
+        $("#stat-overdue").textContent = overdue;
+        $("#stat-done").textContent = done;
+      }
+
+      /* ================================================
+         FILTERING & SORTING
+         ================================================ */
+      function getFilteredTasks() {
+        var filtered = tasks.slice();
+        var search = searchInput.value.toLowerCase().trim();
+        var ambFilter = filterAmbassador.value;
+        var priFilter = filterPriority.value;
+        var lblFilter = filterLabel.value;
+        var sort = sortBy.value;
+
+        if (search) {
+          filtered = filtered.filter(function (t) {
+            return t.title.toLowerCase().indexOf(search) !== -1 ||
+              (t.description && t.description.toLowerCase().indexOf(search) !== -1);
+          });
+        }
+        if (ambFilter) filtered = filtered.filter(function (t) { return t.ambassador === ambFilter; });
+        if (priFilter) filtered = filtered.filter(function (t) { return t.priority === priFilter; });
+        if (lblFilter) filtered = filtered.filter(function (t) { return t.label === lblFilter; });
+
+        if (sort === "due-asc") {
+          filtered.sort(function (a, b) { return (a.due || "9999") > (b.due || "9999") ? 1 : -1; });
+        } else if (sort === "due-desc") {
+          filtered.sort(function (a, b) { return (b.due || "") > (a.due || "") ? 1 : -1; });
+        } else if (sort === "priority") {
+          filtered.sort(function (a, b) { return (PRIORITY_ORDER[a.priority] || 1) - (PRIORITY_ORDER[b.priority] || 1); });
+        }
+        return filtered;
+      }
+
+      /* ================================================
+         RENDER BOARD
+         ================================================ */
+      function render() {
+        var filtered = getFilteredTasks();
+        var columns = { todo: [], "in-progress": [], done: [] };
+
+        filtered.forEach(function (t) {
+          if (columns[t.status]) columns[t.status].push(t);
+        });
+
+        var statuses = ["todo", "in-progress", "done"];
+        statuses.forEach(function (status) {
+          var body = $("#body-" + status);
+          var count = $("#count-" + status);
+          var colTasks = columns[status];
+
+          count.textContent = colTasks.length;
+
+          if (colTasks.length === 0) {
+            body.innerHTML = '<div class="empty-state">No tasks here yet</div>';
+            return;
+          }
+
+          body.innerHTML = colTasks.map(function (t) {
+            var overdue = isOverdue(t);
+            var dateStr = t.due ? formatDate(t.due) : "";
+            var linkHtml = t.link
+              ? '<a href="' + escapeHtml(t.link) + '" target="_blank" rel="noopener" class="task-link-icon" title="Open link" onclick="event.stopPropagation()">&#128279;</a>'
+              : "";
+
+            return '<div class="task-card" draggable="true" data-id="' + t.id + '">' +
+              '<div class="task-top">' +
+              '<span class="task-title" onclick="window._editTask(\'' + t.id + '\')">' + escapeHtml(t.title) + '</span>' +
+              '<span class="priority-badge ' + t.priority + '">' + t.priority + '</span>' +
+              '</div>' +
+              '<div class="task-meta">' +
+              (dateStr ? '<span class="task-date' + (overdue ? " overdue" : "") + '">' + (overdue ? "&#9888; " : "") + dateStr + '</span>' : '') +
+              '<span class="task-label label-' + t.label + '">' + t.label + '</span>' +
+              linkHtml +
+              (t.ambassador ? '<span class="task-ambassador">' + escapeHtml(t.ambassador) + '</span>' : '') +
+              '</div>' +
+              '</div>';
+          }).join("");
+
+          var cards = body.querySelectorAll(".task-card");
+          for (var i = 0; i < cards.length; i++) {
+            cards[i].addEventListener("dragstart", handleDragStart);
+            cards[i].addEventListener("dragend", handleDragEnd);
+          }
+        });
+
+        updateStats();
+      }
+
+      /* ================================================
+         DRAG AND DROP (DESKTOP)
+         ================================================ */
+      function handleDragStart(e) {
+        draggedId = e.currentTarget.dataset.id;
+        e.currentTarget.classList.add("dragging");
+        e.dataTransfer.effectAllowed = "move";
+        e.dataTransfer.setData("text/plain", draggedId);
+      }
+
+      function handleDragEnd(e) {
+        e.currentTarget.classList.remove("dragging");
+        var cols = $$(".column");
+        for (var i = 0; i < cols.length; i++) cols[i].classList.remove("drag-over");
+        draggedId = null;
+      }
+
+      function initColumnDragEvents() {
+        var bodies = $$(".column-body");
+        for (var i = 0; i < bodies.length; i++) {
+          (function (body) {
+            body.addEventListener("dragover", function (e) {
+              e.preventDefault();
+              e.dataTransfer.dropEffect = "move";
+              body.closest(".column").classList.add("drag-over");
+            });
+            body.addEventListener("dragleave", function (e) {
+              if (!body.contains(e.relatedTarget)) body.closest(".column").classList.remove("drag-over");
+            });
+            body.addEventListener("drop", function (e) {
+              e.preventDefault();
+              var col = body.closest(".column");
+              col.classList.remove("drag-over");
+              var newStatus = col.dataset.status;
+              var id = e.dataTransfer.getData("text/plain");
+              var task = null;
+              for (var j = 0; j < tasks.length; j++) { if (tasks[j].id === id) { task = tasks[j]; break; } }
+              if (task && task.status !== newStatus) { task.status = newStatus; save(); render(); }
+            });
+          })(bodies[i]);
+        }
+      }
+
+      /* ================================================
+         DRAG AND DROP (MOBILE / TOUCH)
+         ================================================ */
+      var touchDragId = null, touchClone = null, touchOffsetX = 0, touchOffsetY = 0;
+
+      document.addEventListener("touchstart", function (e) {
+        var card = e.target.closest(".task-card");
+        if (!card) return;
+        card._touchTimer = setTimeout(function () {
+          touchDragId = card.dataset.id;
+          card.classList.add("dragging");
+          touchClone = card.cloneNode(true);
+          touchClone.style.cssText = "position:fixed;width:" + card.offsetWidth + "px;pointer-events:none;z-index:9999;opacity:0.85;transform:rotate(2deg)";
+          document.body.appendChild(touchClone);
+          var touch = e.touches[0], rect = card.getBoundingClientRect();
+          touchOffsetX = touch.clientX - rect.left;
+          touchOffsetY = touch.clientY - rect.top;
+          touchClone.style.left = (touch.clientX - touchOffsetX) + "px";
+          touchClone.style.top = (touch.clientY - touchOffsetY) + "px";
+        }, 400);
+      }, { passive: true });
+
+      document.addEventListener("touchmove", function (e) {
+        var card = e.target.closest(".task-card");
+        if (card && card._touchTimer && !touchDragId) clearTimeout(card._touchTimer);
+        if (!touchDragId || !touchClone) return;
+        e.preventDefault();
+        var touch = e.touches[0];
+        touchClone.style.left = (touch.clientX - touchOffsetX) + "px";
+        touchClone.style.top = (touch.clientY - touchOffsetY) + "px";
+        var cols = $$(".column");
+        for (var i = 0; i < cols.length; i++) {
+          var rect = cols[i].getBoundingClientRect();
+          cols[i].classList.toggle("drag-over",
+            touch.clientX >= rect.left && touch.clientX <= rect.right &&
+            touch.clientY >= rect.top && touch.clientY <= rect.bottom);
+        }
+      }, { passive: false });
+
+      document.addEventListener("touchend", function (e) {
+        var card = e.target.closest(".task-card");
+        if (card && card._touchTimer) clearTimeout(card._touchTimer);
+        if (!touchDragId) return;
+        if (touchClone) { document.body.removeChild(touchClone); touchClone = null; }
+        var touch = e.changedTouches[0], targetCol = null;
+        var cols = $$(".column");
+        for (var i = 0; i < cols.length; i++) {
+          cols[i].classList.remove("drag-over");
+          var rect = cols[i].getBoundingClientRect();
+          if (touch.clientX >= rect.left && touch.clientX <= rect.right &&
+            touch.clientY >= rect.top && touch.clientY <= rect.bottom) targetCol = cols[i];
+        }
+        if (targetCol) {
+          var task = null;
+          for (var j = 0; j < tasks.length; j++) { if (tasks[j].id === touchDragId) { task = tasks[j]; break; } }
+          if (task && task.status !== targetCol.dataset.status) { task.status = targetCol.dataset.status; save(); }
+        }
+        touchDragId = null;
+        render();
+      });
+
+      /* ================================================
+         TASK MODAL
+         ================================================ */
+      function openModal(task) {
+        if (task) {
+          editingId = task.id;
+          modalTitle.textContent = "EDIT TASK";
+          fieldTitle.value = task.title;
+          fieldDesc.value = task.description || "";
+          fieldPriority.value = task.priority;
+          fieldStatus.value = task.status;
+          fieldDue.value = task.due || "";
+          fieldLabel.value = task.label;
+          fieldAmbassador.value = task.ambassador || "";
+          fieldLink.value = task.link || "";
+          btnDelete.style.display = "inline-block";
+        } else {
+          editingId = null;
+          modalTitle.textContent = "ADD TASK";
+          fieldTitle.value = "";
+          fieldDesc.value = "";
+          fieldPriority.value = "medium";
+          fieldStatus.value = "todo";
+          fieldDue.value = "";
+          fieldLabel.value = "content";
+          fieldAmbassador.value = "";
+          fieldLink.value = "";
+          btnDelete.style.display = "none";
+        }
+        modalOverlay.classList.add("active");
+        setTimeout(function () { fieldTitle.focus(); }, 100);
+      }
+
+      function closeModal() { modalOverlay.classList.remove("active"); editingId = null; }
+
+      function saveTaskFromModal() {
+        var title = fieldTitle.value.trim();
+        if (!title) {
+          fieldTitle.style.borderColor = "var(--high)";
+          fieldTitle.focus();
+          setTimeout(function () { fieldTitle.style.borderColor = ""; }, 1500);
+          return;
+        }
+        var taskData = {
+          title: title,
+          description: fieldDesc.value.trim(),
+          priority: fieldPriority.value,
+          status: fieldStatus.value,
+          due: fieldDue.value,
+          label: fieldLabel.value,
+          ambassador: fieldAmbassador.value,
+          link: fieldLink.value.trim()
+        };
+        if (editingId) {
+          for (var i = 0; i < tasks.length; i++) {
+            if (tasks[i].id === editingId) { Object.assign(tasks[i], taskData); break; }
+          }
+        } else {
+          taskData.id = genId();
+          tasks.push(taskData);
+        }
+        save(); closeModal(); render();
+      }
+
+      function deleteTask() {
+        if (!editingId) return;
+        if (!confirm("Delete this task?")) return;
+        tasks = tasks.filter(function (t) { return t.id !== editingId; });
+        save(); closeModal(); render();
+      }
+
+      window._editTask = function (id) {
+        var task = null;
+        for (var i = 0; i < tasks.length; i++) { if (tasks[i].id === id) { task = tasks[i]; break; } }
+        if (task) openModal(task);
+      };
+
+      /* ================================================
+         AI SETTINGS
+         ================================================ */
+      window._saveSettings = function () {
+        var key = $("#or-key").value.trim();
+        var model = $("#or-model").value;
+        if (key) localStorage.setItem(OR_KEY_STORAGE, key);
+        localStorage.setItem(OR_MODEL_STORAGE, model);
+        updateKeyStatus();
+        $("#settings-overlay").classList.remove("active");
+      };
+
+      function updateKeyStatus() {
+        var el = $("#key-status");
+        if (getApiKey()) {
+          el.className = "key-status valid";
+          el.textContent = "Key saved";
+        } else {
+          el.className = "key-status missing";
+          el.textContent = "No key set — AI features won't work";
+        }
+      }
+
+      function openSettings() {
+        $("#or-key").value = getApiKey();
+        $("#or-model").value = getModel();
+        updateKeyStatus();
+        $("#settings-overlay").classList.add("active");
+      }
+
+      /* ================================================
+         AI COMMAND BAR (Natural Language → Task)
+         ================================================ */
+      window._aiParseCommand = function () {
+        var input = $("#ai-command");
+        var btn = $("#ai-command-btn");
+        var text = input.value.trim();
+        if (!text) return;
+
+        btn.disabled = true;
+        btn.textContent = "Thinking...";
+
+        var systemPrompt = 'You are a task parser for the BBO Ambassador Task Hub. Parse the user\'s natural language into a JSON task object.\n\n' +
+          'Available ambassadors: ' + ambassadors.join(', ') + '\n' +
+          'Available categories: content, event, outreach, promo, merch, admin\n' +
+          'Available priorities: high, medium, low\n' +
+          'Available statuses: todo, in-progress, done\n' +
+          'Today\'s date: ' + todayStr() + '\n\n' +
+          'Return ONLY a valid JSON object with these fields:\n' +
+          '{"title": "string", "description": "string or empty", "priority": "high|medium|low", "status": "todo", "due": "YYYY-MM-DD or empty", "label": "category", "ambassador": "name or empty", "link": ""}\n\n' +
+          'Parse dates naturally: "Friday" = next Friday, "March 20" = 2026-03-20, "tomorrow" = tomorrow\'s date, etc.\n' +
+          'Match ambassador names loosely: "Amb 1" = "Ambassador 1", etc.\n' +
+          'Return ONLY the JSON, no explanation, no markdown.';
+
+        callAI(systemPrompt, text, function (reply, isError) {
+          btn.disabled = false;
+          btn.textContent = "Create";
+
+          if (isError) {
+            alert("AI Error: " + reply);
+            return;
+          }
+
+          try {
+            // Strip markdown code fences if present
+            var clean = reply.replace(/```json\s*/gi, "").replace(/```\s*/g, "").trim();
+            var parsed = JSON.parse(clean);
+            parsed.id = genId();
+            parsed.status = parsed.status || "todo";
+            parsed.priority = parsed.priority || "medium";
+            parsed.label = parsed.label || "content";
+            tasks.push(parsed);
+            save();
+            render();
+            input.value = "";
+          } catch (e) {
+            alert("AI couldn't parse that into a task. Try being more specific.\n\nAI said: " + reply);
+          }
+        });
+      };
+
+      /* ================================================
+         AI TASK GENERATOR (Event → Checklist)
+         ================================================ */
+      window._generateTasks = function () {
+        var btn = $("#btn-gen-go");
+        var eventType = $("#gen-event-type").value;
+        var eventDate = $("#gen-event-date").value;
+        var venue = $("#gen-venue").value.trim();
+        var notes = $("#gen-notes").value.trim();
+
+        if (!eventDate) {
+          alert("Pick an event date");
+          return;
+        }
+
+        btn.disabled = true;
+        btn.textContent = "Generating...";
+
+        var systemPrompt = 'You are a BBO brand operations assistant. Generate a task checklist for brand ambassadors.\n\n' +
+          'Available ambassadors: ' + ambassadors.join(', ') + '\n' +
+          'Available categories: content, event, outreach, promo, merch, admin\n' +
+          'Today: ' + todayStr() + '\n\n' +
+          'Return ONLY a JSON array of task objects. Each task:\n' +
+          '{"title": "string", "description": "string", "priority": "high|medium|low", "status": "todo", "due": "YYYY-MM-DD", "label": "category", "ambassador": "name or empty", "link": ""}\n\n' +
+          'Generate 6-10 practical tasks that cover pre-event prep, day-of execution, and post-event follow-up.\n' +
+          'Distribute tasks across ambassadors. Set due dates relative to the event date (prep tasks before, recap tasks after).\n' +
+          'Think like a brand operations manager for a media/events company.\n' +
+          'Return ONLY the JSON array, no explanation, no markdown.';
+
+        var userMsg = 'Generate ambassador tasks for: ' + eventType;
+        if (venue) userMsg += ' at ' + venue;
+        userMsg += ' on ' + eventDate;
+        if (notes) userMsg += '. Notes: ' + notes;
+
+        callAI(systemPrompt, userMsg, function (reply, isError) {
+          btn.disabled = false;
+          btn.textContent = "Generate with AI";
+
+          if (isError) {
+            alert("AI Error: " + reply);
+            return;
+          }
+
+          try {
+            var clean = reply.replace(/```json\s*/gi, "").replace(/```\s*/g, "").trim();
+            var generated = JSON.parse(clean);
+            if (!Array.isArray(generated)) throw new Error("Not an array");
+
+            var count = 0;
+            generated.forEach(function (t) {
+              t.id = genId();
+              t.status = t.status || "todo";
+              t.priority = t.priority || "medium";
+              t.label = t.label || "event";
+              tasks.push(t);
+              count++;
+            });
+
+            save();
+            render();
+            $("#generate-overlay").classList.remove("active");
+            alert(count + " tasks generated and added to the board!");
+          } catch (e) {
+            alert("AI response couldn't be parsed. Try again.\n\nAI said: " + reply.substring(0, 300));
+          }
+        });
+      };
+
+      /* ================================================
+         AI CHAT PANEL
+         ================================================ */
+      window._toggleChat = function () {
+        var panel = $("#chat-panel");
+        var isOpen = panel.classList.contains("open");
+        panel.classList.toggle("open");
+        document.body.classList.toggle("chat-open");
+        $("#btn-chat").classList.toggle("active");
+        if (!isOpen) setTimeout(function () { $("#chat-input").focus(); }, 300);
+      };
+
+      window._sendChat = function () {
+        var input = $("#chat-input");
+        var btn = $("#chat-send-btn");
+        var text = input.value.trim();
+        if (!text) return;
+
+        // Add user message to UI
+        addChatMsg(text, "user");
+        input.value = "";
+
+        // Add thinking indicator
+        var thinkingEl = addChatMsg("Thinking...", "ai thinking");
+
+        btn.disabled = true;
+
+        var systemPrompt = 'You are the BBO Task Hub AI assistant. You help the brand founder (King Maker) manage ambassador tasks for events, content, and promotions.\n\n' +
+          'You have access to the current task board state:\n' + getBoardSummary() + '\n\n' +
+          'Be conversational, helpful, and direct. Keep responses short (2-5 sentences). If someone asks about overdue tasks, priorities, or workload distribution, reference the actual data.\n' +
+          'If someone asks you to create a task, tell them to use the AI command bar (lightning bolt icon) or the + Add Task button — you can\'t directly modify the board from chat.\n' +
+          'Speak casually. No corporate talk.';
+
+        chatHistory.push({ role: "user", content: text });
+
+        var messagesToSend = chatHistory.slice(-10); // Last 10 messages for context
+
+        callAI(systemPrompt, messagesToSend, function (reply, isError) {
+          btn.disabled = false;
+          // Remove thinking indicator
+          if (thinkingEl && thinkingEl.parentNode) thinkingEl.parentNode.removeChild(thinkingEl);
+
+          if (isError) {
+            addChatMsg(reply, "ai");
+          } else {
+            addChatMsg(reply, "ai");
+            chatHistory.push({ role: "assistant", content: reply });
+          }
+        });
+      };
+
+      function addChatMsg(text, className) {
+        var container = $("#chat-messages");
+        var div = document.createElement("div");
+        div.className = "chat-msg " + className;
+        div.textContent = text;
+        container.appendChild(div);
+        container.scrollTop = container.scrollHeight;
+        return div;
+      }
+
+      /* ================================================
+         EVENT LISTENERS
+         ================================================ */
+      btnAdd.addEventListener("click", function () { openModal(null); });
+      btnSave.addEventListener("click", saveTaskFromModal);
+      btnCancel.addEventListener("click", closeModal);
+      btnClose.addEventListener("click", closeModal);
+      btnDelete.addEventListener("click", deleteTask);
+
+      modalOverlay.addEventListener("click", function (e) { if (e.target === modalOverlay) closeModal(); });
+      $("#settings-overlay").addEventListener("click", function (e) { if (e.target === this) this.classList.remove("active"); });
+      $("#generate-overlay").addEventListener("click", function (e) { if (e.target === this) this.classList.remove("active"); });
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          if (modalOverlay.classList.contains("active")) closeModal();
+          else if ($("#settings-overlay").classList.contains("active")) $("#settings-overlay").classList.remove("active");
+          else if ($("#generate-overlay").classList.contains("active")) $("#generate-overlay").classList.remove("active");
+          else if ($("#chat-panel").classList.contains("open")) window._toggleChat();
+        }
+        if (e.key === "Enter" && modalOverlay.classList.contains("active") && e.target.tagName !== "TEXTAREA") {
+          e.preventDefault();
+          saveTaskFromModal();
+        }
+      });
+
+      // AI command bar Enter key
+      $("#ai-command").addEventListener("keydown", function (e) {
+        if (e.key === "Enter") { e.preventDefault(); window._aiParseCommand(); }
+      });
+
+      // Chat Enter key
+      $("#chat-input").addEventListener("keydown", function (e) {
+        if (e.key === "Enter") { e.preventDefault(); window._sendChat(); }
+      });
+
+      // Header buttons
+      $("#btn-ai-bar").addEventListener("click", function () {
+        var bar = $("#ai-bar");
+        bar.classList.toggle("visible");
+        this.classList.toggle("active");
+        if (bar.classList.contains("visible")) $("#ai-command").focus();
+      });
+      $("#btn-generate").addEventListener("click", function () {
+        if (!getApiKey()) { openSettings(); return; }
+        $("#generate-overlay").classList.add("active");
+      });
+      $("#btn-chat").addEventListener("click", function () { window._toggleChat(); });
+      $("#btn-settings").addEventListener("click", openSettings);
+
+      // Filter & search
+      searchInput.addEventListener("input", render);
+      filterAmbassador.addEventListener("change", render);
+      filterPriority.addEventListener("change", render);
+      filterLabel.addEventListener("change", render);
+      sortBy.addEventListener("change", render);
+
+      /* ================================================
+         INITIALIZE APP
+         ================================================ */
+      load();
+      populateLabelDropdown();
+      populateAmbassadorDropdowns();
+      initColumnDragEvents();
+      render();
+
+    })();
+  </script>
+</body>
+
+</html>
