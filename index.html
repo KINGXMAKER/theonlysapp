@@ -430,6 +430,7 @@
   <!-- Boot -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
+      // 1. Init all modules first (registers firebase-ready listeners)
       BBO_APP.init();
       BBO_TASKS.init();
       BBO_AI.init();
@@ -437,6 +438,9 @@
       BBO_ANNOUNCEMENTS.init();
       BBO_EVENTS.init();
       BBO_AVAILABILITY.init();
+
+      // 2. NOW auto-init Firebase — fires "firebase-ready" AFTER listeners are set
+      BBO_FB.autoInit();
     });
   </script>
 
