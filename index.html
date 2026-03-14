@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>THE ONLYS — BBO Command Center</title>
-  <meta name="description" content="THE ONLYS — Internal command center for BBO operations, tasks, events, and delegation.">
+  <title>BBO Command Center</title>
+  <meta name="description" content="Bad Bitches Only — Internal command center for ops, tasks, and delegation.">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -12,161 +12,42 @@
 
   <!-- ==================== HEADER ==================== -->
   <div class="header">
-    <span class="header-crown">👑</span>
-    <h1>THE ONLYS</h1>
-    <p>BBO Command Center</p>
+    <h1>BAD BITCHES ONLY</h1>
+    <p>COMMAND CENTER</p>
     <div class="header-actions">
-      <button class="icon-btn" id="btn-chat" title="AI Assistant">&#128172;</button>
+      <button class="icon-btn" id="btn-chat" title="Ops Assistant">&#128172;</button>
       <button class="icon-btn" id="btn-settings" title="Settings">&#9881;</button>
     </div>
   </div>
 
   <!-- ==================== TAB NAVIGATION ==================== -->
   <nav class="tab-nav">
-    <button class="tab-btn active" data-tab="mytasks">&#128203; MY TASKS</button>
-    <button class="tab-btn" data-tab="tasks">&#128101; TEAM</button>
-    <button class="tab-btn" data-tab="events">&#127878; EVENTS</button>
-    <button class="tab-btn" data-tab="voicenotes">&#127908; VOICE</button>
-    <button class="tab-btn" data-tab="calendar">&#128197; CALENDAR</button>
+    <button class="tab-btn active" data-tab="mytasks">TASKS</button>
+    <button class="tab-btn" data-tab="voicenotes">VOICE</button>
+    <button class="tab-btn" data-tab="calendar">CALENDAR</button>
   </nav>
 
-  <!-- ==================== MY TASKS TAB (DEFAULT) ==================== -->
+  <!-- ==================== TASKS TAB ==================== -->
   <div class="tab-content active" id="tab-mytasks">
 
-    <!-- Dashboard Widgets -->
-    <div class="mt-dashboard">
-      <div class="mt-widget urgent">
-        <div class="mt-widget-icon">&#9888;</div>
-        <div class="mt-widget-value" id="mt-urgent-count">0</div>
-        <div class="mt-widget-label">Urgent</div>
-      </div>
-      <div class="mt-widget overdue">
-        <div class="mt-widget-icon">&#128308;</div>
-        <div class="mt-widget-value" id="mt-overdue-count">0</div>
-        <div class="mt-widget-label">Overdue</div>
-      </div>
-      <div class="mt-widget today">
-        <div class="mt-widget-icon">&#128197;</div>
-        <div class="mt-widget-value" id="mt-today-count">0</div>
-        <div class="mt-widget-label">Due Today</div>
-      </div>
-      <div class="mt-widget total">
-        <div class="mt-widget-icon">&#128203;</div>
-        <div class="mt-widget-value" id="mt-total-count">0</div>
-        <div class="mt-widget-label">Active</div>
-      </div>
-    </div>
-
-    <!-- Filters & Controls -->
+    <!-- Simple toolbar -->
     <div class="mt-toolbar">
-      <input type="text" class="search-box" id="mt-search" placeholder="Search my tasks...">
-      <select id="mt-filter-priority">
-        <option value="">All Priorities</option>
-        <option value="urgent">Urgent</option>
-        <option value="high">High</option>
-        <option value="medium">Medium</option>
-        <option value="low">Low</option>
-      </select>
-      <select id="mt-filter-status">
-        <option value="">All Statuses</option>
-        <option value="not-started">Not Started</option>
-        <option value="in-progress">In Progress</option>
-        <option value="done">Done</option>
-        <option value="blocked">Blocked</option>
-      </select>
-      <select id="mt-filter-owner">
-        <option value="">All Owners</option>
-        <option value="King Maker">King Maker</option>
-      </select>
-      <select id="mt-filter-category">
-        <option value="">All Categories</option>
-        <option value="content">Content</option>
-        <option value="event">Event</option>
-        <option value="outreach">Outreach</option>
-        <option value="promo">Promo</option>
-        <option value="merch">Merch</option>
-        <option value="admin">Admin</option>
-        <option value="tech">Tech</option>
-        <option value="finance">Finance</option>
-        <option value="personal">Personal</option>
-      </select>
-      <select id="mt-sort">
-        <option value="newest">Newest First</option>
-        <option value="due-soonest">Due Soonest</option>
-        <option value="priority">Highest Priority</option>
-      </select>
+      <input type="text" class="search-box" id="mt-search" placeholder="Search tasks...">
       <button class="btn-add" id="btn-add-mytask">+ Add Task</button>
     </div>
 
-    <!-- Task Cards -->
+    <!-- Task List -->
     <div class="mt-cards" id="mt-cards"></div>
-  </div>
 
-  <!-- ==================== TEAM TAB (Delegated Tasks) ==================== -->
-  <div class="tab-content" id="tab-tasks">
-
-    <!-- Stats Row -->
-    <div class="stats-row">
-      <div class="stat-card">
-        <div class="stat-value" id="stat-total">0</div>
-        <div class="stat-label">Total</div>
-      </div>
-      <div class="stat-card overdue">
-        <div class="stat-value" id="stat-overdue">0</div>
-        <div class="stat-label">Overdue</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value" id="stat-done">0</div>
-        <div class="stat-label">Done</div>
-      </div>
+    <!-- Bottom actions -->
+    <div class="mt-bottom-actions">
+      <button class="mt-email-btn" id="btn-email-tasks">&#9993; Email Tasks</button>
     </div>
-
-    <!-- Toolbar -->
-    <div class="toolbar">
-      <input type="text" class="search-box" id="search" placeholder="Search team tasks...">
-      <select id="filter-ambassador"><option value="">All Assignees</option></select>
-      <select id="filter-priority">
-        <option value="">All Priorities</option>
-        <option value="high">High</option>
-        <option value="medium">Medium</option>
-        <option value="low">Low</option>
-      </select>
-      <select id="filter-label"><option value="">All Categories</option></select>
-      <select id="sort-by">
-        <option value="">Sort</option>
-        <option value="due-asc">Due (Earliest)</option>
-        <option value="due-desc">Due (Latest)</option>
-        <option value="priority">Priority</option>
-      </select>
-      <button class="btn-add" id="btn-add-task">+ Assign Task</button>
-    </div>
-
-    <!-- Kanban Board -->
-    <div class="board">
-      <div class="column" data-status="todo" id="col-todo">
-        <div class="column-header"><h2>TO DO</h2><span class="count" id="count-todo">0</span></div>
-        <div class="column-body" id="body-todo"></div>
-      </div>
-      <div class="column" data-status="in-progress" id="col-in-progress">
-        <div class="column-header"><h2>IN PROGRESS</h2><span class="count" id="count-in-progress">0</span></div>
-        <div class="column-body" id="body-in-progress"></div>
-      </div>
-      <div class="column" data-status="done" id="col-done">
-        <div class="column-header"><h2>DONE</h2><span class="count" id="count-done">0</span></div>
-        <div class="column-body" id="body-done"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ==================== EVENTS TAB ==================== -->
-  <div class="tab-content" id="tab-events">
-    <div id="events-view"></div>
   </div>
 
   <!-- ==================== VOICE NOTES TAB ==================== -->
   <div class="tab-content" id="tab-voicenotes">
 
-    <!-- Header Bar -->
     <div class="vn-header">
       <div class="vn-header-left">
         <span class="vn-count-label">&#127908; <span id="vn-count">0</span> notes</span>
@@ -177,7 +58,6 @@
       </div>
     </div>
 
-    <!-- Recording Indicator -->
     <div class="vn-recording" id="vn-recording-indicator" style="display:none">
       <span class="vn-rec-dot"></span>
       <span class="vn-rec-label">RECORDING</span>
@@ -186,18 +66,16 @@
       <button class="vn-rec-btn vn-stop" id="vn-stop-btn">Stop</button>
     </div>
 
-    <!-- Filters -->
     <div class="vn-toolbar">
       <input type="text" class="search-box" id="vn-search" placeholder="Search voice notes...">
       <select id="vn-filter-tag"><option value="">All Tags</option></select>
       <select id="vn-sort">
-        <option value="newest">Newest First</option>
-        <option value="oldest">Oldest First</option>
-        <option value="longest">Longest First</option>
+        <option value="newest">Newest</option>
+        <option value="oldest">Oldest</option>
+        <option value="longest">Longest</option>
       </select>
     </div>
 
-    <!-- Voice Note Cards -->
     <div class="vn-cards" id="vn-cards"></div>
   </div>
 
@@ -206,7 +84,7 @@
     <div id="calendar-view"></div>
   </div>
 
-  <!-- ==================== MY TASK MODAL ==================== -->
+  <!-- ==================== ADD TASK MODAL (Simplified) ==================== -->
   <div class="modal-overlay" id="mt-modal-overlay">
     <div class="modal">
       <div class="modal-header">
@@ -215,68 +93,18 @@
       </div>
       <div class="modal-body">
         <div class="field-group">
-          <label for="mt-title">Title</label>
-          <input type="text" id="mt-title" placeholder="What needs to get done?">
-        </div>
-        <div class="field-group">
-          <label for="mt-desc">Description</label>
-          <textarea id="mt-desc" placeholder="Details, context, links..."></textarea>
-        </div>
-        <div class="field-row">
-          <div class="field-group">
-            <label for="mt-priority">Priority</label>
-            <select id="mt-priority">
-              <option value="medium">Medium</option>
-              <option value="high">High</option>
-              <option value="urgent">Urgent</option>
-              <option value="low">Low</option>
-            </select>
-          </div>
-          <div class="field-group">
-            <label for="mt-status">Status</label>
-            <select id="mt-status">
-              <option value="not-started">Not Started</option>
-              <option value="in-progress">In Progress</option>
-              <option value="done">Done</option>
-              <option value="blocked">Blocked</option>
-            </select>
-          </div>
-        </div>
-        <div class="field-row">
-          <div class="field-group">
-            <label for="mt-due">Due Date</label>
-            <input type="date" id="mt-due">
-          </div>
-          <div class="field-group">
-            <label for="mt-category">Category</label>
-            <select id="mt-category">
-              <option value="content">Content</option>
-              <option value="event">Event</option>
-              <option value="outreach">Outreach</option>
-              <option value="promo">Promo</option>
-              <option value="merch">Merch</option>
-              <option value="admin">Admin</option>
-              <option value="tech">Tech</option>
-              <option value="finance">Finance</option>
-              <option value="personal">Personal</option>
-            </select>
-          </div>
-        </div>
-        <div class="field-group">
-          <label for="mt-owner">Owner</label>
-          <select id="mt-owner">
-            <option value="King Maker">King Maker</option>
-          </select>
+          <label for="mt-title">What needs to get done?</label>
+          <input type="text" id="mt-title" placeholder="Task title..." autofocus>
         </div>
         <div class="field-group">
           <label for="mt-notes">Notes</label>
-          <textarea id="mt-notes" placeholder="Extra notes, follow-ups..." style="min-height:60px"></textarea>
+          <textarea id="mt-notes" placeholder="Details, links, context..." style="min-height:100px"></textarea>
         </div>
       </div>
       <div class="modal-footer">
         <button class="btn-delete" id="mt-btn-delete" style="display:none">Delete</button>
         <button class="btn-cancel" id="mt-btn-cancel">Cancel</button>
-        <button class="btn-save" id="mt-btn-save">Save Task</button>
+        <button class="btn-save" id="mt-btn-save">Save</button>
       </div>
     </div>
   </div>
@@ -313,145 +141,17 @@
         </div>
         <div class="field-group">
           <label for="vn-summary">Summary</label>
-          <textarea id="vn-summary" placeholder="AI-generated summary will appear here..." style="min-height:50px"></textarea>
+          <textarea id="vn-summary" placeholder="AI-generated summary..." style="min-height:50px"></textarea>
         </div>
         <div class="field-group">
           <label for="vn-actions">Action Items</label>
-          <textarea id="vn-actions" placeholder="AI-extracted tasks will appear here..." style="min-height:50px"></textarea>
+          <textarea id="vn-actions" placeholder="AI-extracted tasks..." style="min-height:50px"></textarea>
         </div>
       </div>
       <div class="modal-footer">
         <button class="btn-delete" id="vn-btn-delete" style="display:none">Delete</button>
         <button class="btn-cancel" id="vn-btn-cancel">Cancel</button>
         <button class="btn-save" id="vn-btn-save">Save Note</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ==================== TEAM TASK MODAL ==================== -->
-  <div class="modal-overlay" id="modal-overlay">
-    <div class="modal">
-      <div class="modal-header">
-        <h2 id="modal-title">ASSIGN TASK</h2>
-        <button class="modal-close" id="modal-close">&times;</button>
-      </div>
-      <div class="modal-body">
-        <div class="field-group">
-          <label for="task-title">Title</label>
-          <input type="text" id="task-title" placeholder="What needs to be done?">
-        </div>
-        <div class="field-group">
-          <label for="task-desc">Description / Notes</label>
-          <textarea id="task-desc" placeholder="Details, instructions, context..."></textarea>
-        </div>
-        <div class="field-row">
-          <div class="field-group">
-            <label for="task-priority">Priority</label>
-            <select id="task-priority">
-              <option value="medium">Medium</option>
-              <option value="high">High</option>
-              <option value="low">Low</option>
-            </select>
-          </div>
-          <div class="field-group">
-            <label for="task-status">Status</label>
-            <select id="task-status">
-              <option value="todo">To Do</option>
-              <option value="in-progress">In Progress</option>
-              <option value="done">Done</option>
-            </select>
-          </div>
-        </div>
-        <div class="field-row">
-          <div class="field-group">
-            <label for="task-due">Due Date</label>
-            <input type="date" id="task-due">
-          </div>
-          <div class="field-group">
-            <label for="task-label">Category</label>
-            <select id="task-label">
-              <option value="content">Content</option>
-              <option value="event">Event</option>
-              <option value="outreach">Outreach</option>
-              <option value="promo">Promo</option>
-              <option value="merch">Merch</option>
-              <option value="admin">Admin</option>
-            </select>
-          </div>
-        </div>
-        <div class="field-group">
-          <label for="task-ambassador">Assign To</label>
-          <select id="task-ambassador"><option value="">Unassigned</option></select>
-        </div>
-        <div class="field-group">
-          <label for="task-link">Link (Google Drive, Canva, IG post, etc.)</label>
-          <input type="url" id="task-link" placeholder="https://...">
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn-delete" id="btn-delete" style="display:none">Delete</button>
-        <button class="btn-cancel" id="btn-cancel">Cancel</button>
-        <button class="btn-save" id="btn-save">Save Task</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ==================== EVENT MODAL ==================== -->
-  <div class="modal-overlay" id="event-overlay">
-    <div class="modal" style="max-width:560px">
-      <div class="modal-header">
-        <h2 id="ev-modal-title">CREATE EVENT</h2>
-        <button class="modal-close" onclick="BBO_EVENTS.closeModal()">&times;</button>
-      </div>
-      <div class="modal-body">
-        <div class="field-group">
-          <label for="ev-title">Event Title</label>
-          <input type="text" id="ev-title" placeholder="e.g. Restaurant Takeover @ Catch">
-        </div>
-        <div class="field-row">
-          <div class="field-group">
-            <label for="ev-date">Date</label>
-            <input type="date" id="ev-date">
-          </div>
-          <div class="field-group">
-            <label for="ev-calltime">Call Time</label>
-            <input type="text" id="ev-calltime" placeholder="e.g. 6:00 PM">
-          </div>
-        </div>
-        <div class="field-row">
-          <div class="field-group">
-            <label for="ev-venue">Venue</label>
-            <input type="text" id="ev-venue" placeholder="e.g. Catch NYC">
-          </div>
-          <div class="field-group">
-            <label for="ev-dresscode">Dress Code</label>
-            <input type="text" id="ev-dresscode" placeholder="e.g. All Black / BBO Merch">
-          </div>
-        </div>
-        <div class="field-group">
-          <label for="ev-status">Status</label>
-          <select id="ev-status">
-            <option value="upcoming">Upcoming</option>
-            <option value="active">Active</option>
-            <option value="completed">Completed</option>
-          </select>
-        </div>
-        <div class="field-group">
-          <label>Team Roster</label>
-          <div id="ev-roster-checks" style="display:flex;flex-direction:column;gap:4px;padding:8px 0"></div>
-        </div>
-        <div class="field-group">
-          <label for="ev-notes">Notes</label>
-          <textarea id="ev-notes" placeholder="Any additional details..."></textarea>
-        </div>
-        <div class="field-group">
-          <label for="ev-links">Asset Links (one per line)</label>
-          <textarea id="ev-links" placeholder="https://drive.google.com/...&#10;https://canva.com/..." style="min-height:60px"></textarea>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn-cancel" onclick="BBO_EVENTS.closeModal()">Cancel</button>
-        <button class="btn-save" onclick="BBO_EVENTS.save()">Save Event</button>
       </div>
     </div>
   </div>
@@ -464,7 +164,6 @@
         <button class="modal-close" onclick="document.getElementById('settings-overlay').classList.remove('active')">&times;</button>
       </div>
       <div class="settings-body">
-        <!-- Firebase Section -->
         <h3 style="font-family:var(--font-heading);font-size:1rem;letter-spacing:1px;color:var(--pink);margin-bottom:-4px">FIREBASE CONNECTION</h3>
         <div class="fb-status" id="fb-status">
           <span class="dot disconnected"></span> Not Connected
@@ -500,10 +199,7 @@
           </div>
         </div>
         <p class="settings-note">Find these values in your Firebase console → Project Settings → General → Your apps → Config.</p>
-
         <hr style="border:none;border-top:1px solid var(--gray-subtle);margin:8px 0">
-
-        <!-- OpenRouter Section -->
         <h3 style="font-family:var(--font-heading);font-size:1rem;letter-spacing:1px;color:var(--pink);margin-bottom:-4px">AI (OPENROUTER)</h3>
         <div class="field-group">
           <label for="or-key">OpenRouter API Key</label>
@@ -529,11 +225,11 @@
   <!-- ==================== AI CHAT PANEL ==================== -->
   <div class="chat-panel" id="chat-panel">
     <div class="chat-header">
-      <h3>&#9889; AI ASSISTANT</h3>
+      <h3>OPS ASSISTANT</h3>
       <button class="modal-close" onclick="BBO_AI.toggleChat()">&times;</button>
     </div>
     <div class="chat-messages" id="chat-messages">
-      <div class="chat-msg ai">What's good? I'm your ops assistant. Ask me anything about your tasks, events, or team workflow.</div>
+      <div class="chat-msg ai">What's good? I'm your ops assistant. Ask me anything about your tasks or workflow.</div>
     </div>
     <div class="chat-input-area">
       <input type="text" class="chat-input" id="chat-input" placeholder="Ask anything...">
@@ -558,29 +254,21 @@
   </div>
 
   <!-- ==================== SCRIPTS ==================== -->
-  <!-- Firebase SDK (v9 compat) -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
-  <!-- App Modules -->
   <script src="js/firebase-config.js"></script>
   <script src="js/app.js"></script>
-  <script src="js/tasks.js"></script>
   <script src="js/ai.js"></script>
   <script src="js/calendar.js"></script>
-  <script src="js/events.js"></script>
   <script src="js/mytasks.js"></script>
   <script src="js/voicenotes.js"></script>
 
-  <!-- Boot -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      // 1. Init all modules (registers firebase-ready listeners)
       BBO_APP.init();
-      BBO_TASKS.init();
       BBO_AI.init();
       BBO_CALENDAR.init();
-      BBO_EVENTS.init();
       BBO_MYTASKS.init();
       BBO_VOICENOTES.init();
 
@@ -613,7 +301,6 @@
         });
       })();
 
-      // 2. Auto-init Firebase — fires "firebase-ready" AFTER listeners are set
       BBO_FB.autoInit();
     });
   </script>
