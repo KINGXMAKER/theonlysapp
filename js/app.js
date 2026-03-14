@@ -220,12 +220,11 @@ var BBO_APP = (function () {
       }
     });
 
-    // Auto-init Firebase
-    BBO_FB.autoInit();
+    // Firebase status (autoInit is called from boot after all modules register)
     updateFirebaseStatus();
 
-    // Start on Tasks tab
-    switchTab("tasks");
+    // Start on My Tasks tab (command center default)
+    switchTab("mytasks");
   }
 
   /* --- Public API --- */
